@@ -25,7 +25,7 @@ def index():
     game_id = request.form["game_id"]
     if not game_id:
         game = Game()
-        player = Player(game.id, username)
+        player = Player(game.id, username, True)
 
         db.session.add_all([game, player])
         db.session.commit()
@@ -50,8 +50,18 @@ def index():
 
     player = Player(game.id, username)
     db.session.add(player)
+    db.session.commit()
 
     response = redirect("/g?s=0")
     response.set_cookie("se_to", player.session_token)
 
     return response
+
+
+@auth_blueprint.get("/reset")
+def reset():
+    Game.query.delete()
+    Player.query.delete()
+
+    db.session.commit()
+    return redirect("/")

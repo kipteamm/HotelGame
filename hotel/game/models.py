@@ -22,11 +22,18 @@ class Game(db.Model):
 
         self.creation_timestamp = time.time()
 
-    def serialize(self) -> dict:
-        return {
+    def serialize(self, players: bool=False) -> dict:
+        data = {
             "id": self.id,
+            "stage": self.stage,
             "creation_timestamp": self.creation_timestamp,
         }
+
+        if not players:
+            return data
+        
+        data["players"] = [player.serialize() for player in Player.query.filter_by(game_id=self.id).all()]
+        return data
 
 
 class Player(db.Model):
@@ -34,12 +41,15 @@ class Player(db.Model):
     
     session_token = db.Column(db.String(128), primary_key=True)
     game_id = db.Column(db.String(128), db.ForeignKey('games.id'), nullable=False)
-    username = db.Column(db.String(128))
 
-    def __init__(self, game_id: str, username: str):
+    username = db.Column(db.String(128))
+    is_host = db.Column(db.Boolean(), default=False)
+
+    def __init__(self, game_id: str, username: str, is_host=False):
         self.session_token = secrets.token_urlsafe(64)
         self.game_id = game_id
         self.username = username
+        self.is_host = is_host
 
     @classmethod
     def get_game(cls, session_token: str | None) -> tuple[bool, str]:
@@ -53,6 +63,7 @@ class Player(db.Model):
         game: tuple | None = Game.query.with_entities(Game.stage).filter_by(id=player.game_id).first()
         if not game:
             db.session.delete(player)
+            db.session.commit()
             return False, ""
         
         return True, str(game[0])
@@ -61,4 +72,5 @@ class Player(db.Model):
         return {
             "session_token": self.session_token,
             "username": self.username,
+            "is_host": self.is_host
         }

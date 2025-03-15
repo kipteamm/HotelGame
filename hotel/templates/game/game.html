@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Hotel</title>
+
+    <script>
+        const game = {{ game|tojson }};
+        const player = {{ player|tojson }};
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js" crossorigin="anonymous"></script>
+    <script src="/static/js/gameManager.js"></script>
+
+    <script src="/static/js/socketManager.js"></script>
+    <script src="/static/js/renderManager.js"></script>
+</head>
+<body>
+    <div class="stage" id="stage-0">
+        Share this game ID with your players <code>{{ game.id }}</code>
+        
+        <ul id="players">
+            {% for _player in game.players %}
+                <li id="{{ _player.session_token }}">
+                    {{ _player.username }}{% if _player.is_host %} (host){% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        
+        {% if player.is_host %}
+            <button onclick="startGame()">Start</button>
+        {% endif %}
+        <button onclick="leaveGame()">Leave</button>
+    </div>
+</body>
+</html>
