@@ -12,3 +12,8 @@ socket.on("player_join", function(data) {
         addPlayer(data);
     });
 });
+
+socket.on("player_leave", function(data) {
+    console.log("player_leave ", data)
+    document.getElementById(data.session_token)?.remove();
+});
