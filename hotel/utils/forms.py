@@ -1,5 +1,3 @@
-from hotel.auth.models import User
-from hotel.extensions import db
 from hotel.config import ALLOWED_CHARACTERS_REGEX
 
 import typing as t
