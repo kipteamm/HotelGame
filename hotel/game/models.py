@@ -45,6 +45,9 @@ class Player(db.Model):
     username = db.Column(db.String(128))
     is_host = db.Column(db.Boolean(), default=False)
 
+    colour = db.Column(db.String(6), nullable=True)
+    money = db.Column(db.Integer(), default=0)
+
     def __init__(self, game_id: str, username: str, is_host=False):
         self.session_token = secrets.token_urlsafe(64)
         self.game_id = game_id
@@ -72,5 +75,7 @@ class Player(db.Model):
         return {
             "session_token": self.session_token,
             "username": self.username,
-            "is_host": self.is_host
+            "is_host": self.is_host,
+            "colour": self.colour,
+            "money": self.money
         }

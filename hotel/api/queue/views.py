@@ -4,6 +4,8 @@ from hotel.extensions import db, socketio
 
 from flask import Blueprint, g
 
+import random
+
 
 queue_blueprint = Blueprint("queue_api", __name__, url_prefix="/api/queue")
 
@@ -19,4 +21,28 @@ def leave_game():
     db.session.delete(g.player)
     db.session.commit()
 
+    return {"success": True}, 204
+
+
+@queue_blueprint.patch("/start")
+@game_authorized
+def start_game():
+    if not g.player.is_host:
+        return {"error": "You are not hosting this game."}, 400
+    
+    colours = ["blue", "green", "red", "yellow"]
+    players: list[Player] = Player.query.filter_by(game_id=g.player.game_id).all()
+    random.shuffle(players)
+    data = []
+
+    for player in players:
+        player.colour = colours.pop()
+        player.money = 12000 if len(players) > 2 else 25000
+
+        data.append(player.serialize())
+
+    Game.query.filter_by(id=g.player.game_id).update({Game.stage: 1})
+    db.session.commit()
+
+    socketio.emit("start_game", data, to=g.player.game_id)
     return {"success": True}, 204

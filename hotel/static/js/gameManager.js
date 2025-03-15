@@ -13,19 +13,21 @@ function getCookie(name) {
 }
 
 if (document.readyState !== 'loading') {
-    gameManager();
+    updateStage(game.stage);
 } else {
     document.addEventListener('DOMContentLoaded', function () {
-        gameManager();
+        updateStage(game.stage);
     });
 }
 
-function gameManager() {
-    document.getElementById("stage-" + game.stage).classList.add("active");
+function updateStage(stage) {
+    document.querySelector(".stage.active")?.classList.remove("active");
+    document.getElementById("stage-" + stage).classList.add("active");
 }
 
 function addPlayer(data) {
-    document.getElementById("players").innerHTML += `<li id="${data.session_token}">${data.username}</li>`
+    game.players.push(data);
+    document.getElementById("players-queue").innerHTML += `<li id="queue-${data.session_token}">${data.username}</li>`
 }
 
 async function leaveGame() {
@@ -42,4 +44,14 @@ async function startGame() {
     if (!response.ok) return processError(response);
     document.getElementById("stage-0").classList.remove("active");
     document.getElementById("stage-1").classList.add("active");
+}
+
+function updatePlayer(playerData) {
+    let playerElm = document.getElementById(playerData.session_token);
+    if (!playerElm) {
+        playerElm = document.createElement("li");
+        document.getElementById("players").appendChild(playerElm);
+    }
+
+    playerElm.innerHTML = `${JSON.stringify(playerData)}`;
 }

@@ -6,6 +6,8 @@
     
     <title>Hotel</title>
 
+    <link rel="stylesheet" type="text/css" href="/static/css/game.css">
+
     <script>
         const game = {{ game|tojson }};
         const player = {{ player|tojson }};
@@ -20,9 +22,9 @@
     <div class="stage" id="stage-0">
         Share this game ID with your players <code>{{ game.id }}</code>
         
-        <ul id="players">
+        <ul id="players-queue">
             {% for _player in game.players %}
-                <li id="{{ _player.session_token }}">
+                <li id="queue-{{ _player.session_token }}">
                     {{ _player.username }}{% if _player.is_host %} (host){% endif %}
                 </li>
             {% endfor %}
@@ -32,6 +34,16 @@
             <button onclick="startGame()">Start</button>
         {% endif %}
         <button onclick="leaveGame()">Leave</button>
+    </div>
+
+    <div class="stage" id="stage-1">
+        <ul id="players">
+            {% for _player in game.players %}
+                <li id="{{ _player.session_token }}">
+                    {{ _player }}
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 </body>
 </html>

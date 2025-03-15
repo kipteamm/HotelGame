@@ -1,0 +1,7 @@
+.stage {
+    display: none;
+    background-color: gainsboro;
+}
+.stage.active {
+    display: block;
+}
