@@ -1,7 +1,15 @@
+body {
+    margin: 0px;
+}
+
 .stage {
     display: none;
     background-color: gainsboro;
 }
 .stage.active {
     display: block;
+}
+
+ul {
+    position: fixed;
 }

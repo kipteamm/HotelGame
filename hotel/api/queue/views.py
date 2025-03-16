@@ -30,7 +30,7 @@ def start_game():
     if not g.player.is_host:
         return {"error": "You are not hosting this game."}, 400
     
-    colours = ["blue", "green", "red", "yellow"]
+    colours = ["yellow", "red", "green", "blue"]
     players: list[Player] = Player.query.filter_by(game_id=g.player.game_id).all()
     random.shuffle(players)
     data = []

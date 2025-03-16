@@ -12,6 +12,8 @@ class Game(db.Model):
     id = db.Column(db.String(128), primary_key=True)
     stage = db.Column(db.Integer(), default=0)
 
+    player = db.Column(db.String(6), default="blue")
+
     creation_timestamp = db.Column(db.Float(), nullable=False, unique=False)
 
     def __init__(self):
@@ -26,6 +28,7 @@ class Game(db.Model):
         data = {
             "id": self.id,
             "stage": self.stage,
+            "player": self.player,
             "creation_timestamp": self.creation_timestamp,
         }
 
