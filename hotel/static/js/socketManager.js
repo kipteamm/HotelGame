@@ -2,7 +2,7 @@ const socket = io();
 
 socket.on("connect", function() {
     console.log("connect");
-    socket.emit("join", {"token": getCookie("se_to")});
+    socket.emit("join", {"session_token": getCookie("se_to")});
 });
 
 socket.on("player_join", function(data) {
@@ -23,6 +23,14 @@ socket.on("start_game", function(data) {
     updateStage(1);
     resizeCanvas();
     draw();
+    awaitDice();
 });
 
 socket.on("update_players", (data) => data.forEach(player => updatePlayer(player)));
+
+socket.on("start_roll_dice", (data) => startRollDice());
+
+socket.on("stop_roll_dice", async function(data) {
+    await stopRollDice(data.roll, data.moves);
+    updatePlayer(data.player);
+});

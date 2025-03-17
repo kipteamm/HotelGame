@@ -37,6 +37,8 @@
     </div>
 
     <div class="stage" id="stage-1">
+        <div class="player-action" id="dice-action"></div>
+        
         <ul id="players">
             {% for _player in game.players %}
                 <li id="{{ _player.session_token }}">

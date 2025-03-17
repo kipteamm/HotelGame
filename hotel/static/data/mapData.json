@@ -4,5 +4,47 @@
         "blue": {"x": 110, "y": 1440},
         "green": {"x": 185, "y": 1440},
         "yellow": {"x": 262, "y": 1440}
+    },
+    "tiles" : {
+        "tile_0": {
+            "x": 147,
+            "y": 1250,
+            "type": "construct"
+        },
+        "tile_1": {
+            "x": 104,
+            "y": 1000,
+            "type": "buy"
+        },
+        "tile_2": {
+            "x": 104,
+            "y": 800,
+            "type": "construct"
+        },
+        "tile_3": {
+            "x": 130,
+            "y": 610,
+            "type": "buy"
+        },
+        "tile_4": {
+            "x": 250,
+            "y": 460,
+            "type": "construct"
+        },
+        "tile_5": {
+            "x": 430,
+            "y": 365,
+            "type": "buy"
+        },
+        "tile_6": {
+            "x": 600,
+            "y": 365,
+            "type": "construct"
+        },
+        "tile_7": {
+            "x": 790,
+            "y": 460,
+            "type": "buy"
+        }
     }
 }

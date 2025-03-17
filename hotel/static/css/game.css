@@ -13,3 +13,32 @@ body {
 ul {
     position: fixed;
 }
+
+.player-action {
+    display: none;
+    transition: .3s;
+}
+.player-action.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(0, 0, 0, .75);
+    color: white;
+}
+
+.dice {
+    background: brown;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
