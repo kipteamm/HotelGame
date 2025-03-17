@@ -1,4 +1,5 @@
 from hotel.api.queue.views import queue_blueprint
+from hotel.api.game.views import game_blueprint as game_api_blueprint
 from hotel.game.events import register_events
 from hotel.game.views import game_blueprint
 from hotel.auth.views import auth_blueprint
@@ -14,6 +15,7 @@ from flask import Flask, request, redirect
 def create_app() -> Flask:
     app = Flask(__name__, static_folder="static", static_url_path="/static")
 
+    app.register_blueprint(game_api_blueprint)
     app.register_blueprint(queue_blueprint)
     app.register_blueprint(game_blueprint)
     app.register_blueprint(auth_blueprint)

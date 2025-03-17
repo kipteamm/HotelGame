@@ -9,42 +9,50 @@
         "tile_0": {
             "x": 147,
             "y": 1250,
-            "type": "construct"
+            "type": "construct",
+            "hotels": ["Fujiyama"]
         },
         "tile_1": {
             "x": 104,
             "y": 1000,
-            "type": "buy"
+            "type": "buy",
+            "hotels": ["Fujiyama"]
         },
         "tile_2": {
             "x": 104,
             "y": 800,
-            "type": "construct"
+            "type": "construct",
+            "hotels": ["Fujiyama"]
         },
         "tile_3": {
             "x": 130,
             "y": 610,
-            "type": "buy"
+            "type": "buy",
+            "hotels": ["Boomerang", "Fujiyama"]
         },
         "tile_4": {
             "x": 250,
             "y": 460,
-            "type": "construct"
+            "type": "construct",
+            "hotels": ["Boomerang", "Fujiyama"]
         },
         "tile_5": {
             "x": 430,
             "y": 365,
-            "type": "buy"
+            "type": "buy",
+            "hotels": ["Boomerang", "Fujiyama"]
         },
         "tile_6": {
             "x": 600,
             "y": 365,
-            "type": "construct"
+            "type": "construct",
+            "hotels": ["Boomerang", "Fujiyama"]
         },
         "tile_7": {
             "x": 790,
             "y": 460,
-            "type": "buy"
+            "type": "buy",
+            "hotels": ["Boomerang", "Fujiyama"]
         }
     }
 }

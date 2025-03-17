@@ -43,7 +43,7 @@ def start_game():
 
         data.append(player.serialize())
 
-    Game.query.filter_by(id=g.player.game_id).update({Game.stage: 1})
+    Game.query.filter_by(id=g.player.game_id).update({Game.stage: 1, Game.players: len(players)})
     db.session.commit()
 
     socketio.emit("start_game", data, to=g.player.game_id)

@@ -35,5 +35,5 @@ def register_events(socketio: SocketIO):
         player.pos_y = map_data.get_tile(player.tile)["y"]
         db.session.commit()
 
-        socketio.emit("stop_roll_dice", {"roll": roll, "player": player.serialize(), "tile_type": map_data.get_tile(player.tile)["type"], "moves": moves}, to=player.game_id)
+        socketio.emit("stop_roll_dice", {"roll": roll, "player": player.serialize(), "tile": map_data.get_tile(player.tile), "moves": moves}, to=player.game_id)
         return

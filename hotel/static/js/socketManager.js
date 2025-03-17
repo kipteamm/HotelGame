@@ -26,6 +26,11 @@ socket.on("start_game", function(data) {
     awaitDice();
 });
 
+socket.on("next_turn", function(data) {
+    game.player = data.player;
+    awaitDice();
+});
+
 socket.on("update_players", (data) => data.forEach(player => updatePlayer(player)));
 
 socket.on("start_roll_dice", (data) => startRollDice());
@@ -33,4 +38,7 @@ socket.on("start_roll_dice", (data) => startRollDice());
 socket.on("stop_roll_dice", async function(data) {
     await stopRollDice(data.roll, data.moves);
     updatePlayer(data.player);
+
+    if (data.tile.type !== "action") return playerActions(data.tile);
+    awaitAction();
 });

@@ -42,3 +42,19 @@ ul {
     align-items: center;
     justify-content: center;
 }
+
+.actions {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    height: 30vh;
+    background: rgb(0, 0, 0, .75);
+    display: none;
+    transition: .3s;
+    text-align: center;
+}
+.actions.active {
+    display: block;
+}

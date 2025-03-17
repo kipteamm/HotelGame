@@ -13,6 +13,7 @@ class Game(db.Model):
     stage = db.Column(db.Integer(), default=0)
 
     player = db.Column(db.String(6), default="blue")
+    players = db.Column(db.Integer(), default=1)
 
     creation_timestamp = db.Column(db.Float(), nullable=False, unique=False)
 
@@ -29,6 +30,7 @@ class Game(db.Model):
             "id": self.id,
             "stage": self.stage,
             "player": self.player,
+            "players": self.players,
             "creation_timestamp": self.creation_timestamp,
         }
 
@@ -87,4 +89,5 @@ class Player(db.Model):
             "pos_x": self.pos_x,
             "pos_y": self.pos_y,
             "tile": self.tile,
+            "hotels": []
         }

@@ -160,3 +160,28 @@ function moveToPoint(player, target) {
         animate();
     });
 }
+
+function playerActions(tile) {
+    if (player.colour !== game.player) return;
+    const actions = document.getElementById("actions")
+    actions.classList.add("active");
+
+    if (tile.type === "buy") {
+        tile.hotels.forEach(hotel => {
+            actions.innerHTML += `<button onclick="details('${hotel}')">Buy ${hotel}</button>`;
+        });
+    } else if (tile. type === "construct" && player.hotels.length > 0) {
+        player.hotels.forEach(hotel => {
+            actions.innerHTML += `<button onclick="construct('${hotel}')">Construct ${hotel}</button>`;
+        });
+    }
+
+    actions.innerHTML += '<button onclick="endTurn()">End turn</button>'
+}
+
+async function endTurn() {
+    const response = await fetch("/api/game/end-turn", {method: "PATCH", headers: {"Authorization": `Bearer ${getCookie("se_to")}`}});
+    document.getElementById("actions").classList.remove("active");
+
+    if (!response.ok) return processError(response);
+}
