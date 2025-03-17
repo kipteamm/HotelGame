@@ -21,6 +21,8 @@ socket.on("player_leave", function(data) {
 socket.on("start_game", function(data) {
     data.forEach(player => updatePlayer(player))
     updateStage(1);
+    resizeCanvas();
+    draw();
 });
 
 socket.on("update_players", (data) => data.forEach(player => updatePlayer(player)));

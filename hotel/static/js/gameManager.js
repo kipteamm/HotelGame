@@ -47,6 +47,10 @@ async function startGame() {
 }
 
 function updatePlayer(playerData) {
+    const player = game.players.find(player => player.session_token === playerData.session_token);
+    if (!player) return;
+    Object.assign(player, playerData);
+
     let playerElm = document.getElementById(playerData.session_token);
     if (!playerElm) {
         playerElm = document.createElement("li");
@@ -54,4 +58,5 @@ function updatePlayer(playerData) {
     }
 
     playerElm.innerHTML = `${JSON.stringify(playerData)}`;
+
 }

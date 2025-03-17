@@ -1,6 +1,6 @@
 from hotel.utils.decorators import game_authorized
 from hotel.game.models import Game, Player
-from hotel.extensions import db, socketio
+from hotel.extensions import db, socketio, map_data
 
 from flask import Blueprint, g
 
@@ -38,6 +38,8 @@ def start_game():
     for player in players:
         player.colour = colours.pop()
         player.money = 12000 if len(players) > 2 else 25000
+        player.pos_x = map_data.starting_positions[player.colour]["x"]
+        player.pos_y = map_data.starting_positions[player.colour]["y"]
 
         data.append(player.serialize())
 

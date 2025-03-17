@@ -50,6 +50,8 @@ class Player(db.Model):
 
     colour = db.Column(db.String(6), nullable=True)
     money = db.Column(db.Integer(), default=0)
+    pos_x = db.Column(db.Integer(), default=0)
+    pos_y = db.Column(db.Integer(), default=0)
 
     def __init__(self, game_id: str, username: str, is_host=False):
         self.session_token = secrets.token_urlsafe(64)
@@ -80,5 +82,7 @@ class Player(db.Model):
             "username": self.username,
             "is_host": self.is_host,
             "colour": self.colour,
-            "money": self.money
+            "money": self.money,
+            "pos_x": self.pos_x,
+            "pos_y": self.pos_y
         }
