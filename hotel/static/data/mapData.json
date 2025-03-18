@@ -331,5 +331,14 @@
                 "3": [400, 800, 1200, 1600, 2000, 2400]
             }
         }
+    },
+    "actions": {
+        "5": "One free construction phase.",
+        "20": "Construction phase for half the prise.",
+        "25": "Change the road layout.",
+        "10": "Remove an entrance.",
+        "15": "Place an entrance for free",
+        "7": "Select your next free stay",
+        "18": "Select your next half a price stay"
     }
 }

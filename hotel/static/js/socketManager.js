@@ -47,3 +47,5 @@ socket.on("stop_roll_dice", async function(data) {
     if (data.tile.type !== "action") return playerActions(data.tile);
     awaitAction();
 });
+
+socket.on("reveal_card", (data) => revealCard(data));

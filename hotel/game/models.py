@@ -62,6 +62,7 @@ class Player(db.Model):
     pos_x = db.Column(db.Integer(), default=0)
     pos_y = db.Column(db.Integer(), default=0)
     tile = db.Column(db.Integer(), default=0)
+    action = db.Column(db.String(500), nullable=True, default=None)
 
     def __init__(self, game_id: str, username: str, is_host=False):
         self.session_token = secrets.token_urlsafe(64)
@@ -96,5 +97,6 @@ class Player(db.Model):
             "pos_x": self.pos_x,
             "pos_y": self.pos_y,
             "tile": self.tile,
-            "hotels": orjson.loads(self.hotels)
+            "hotels": orjson.loads(self.hotels),
+            "action": self.action
         }

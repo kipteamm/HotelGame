@@ -71,3 +71,28 @@ def buy_hotel(hotel_name: str):
     socketio.emit("next_turn", {"next_player": next_player, "player": player.serialize(), "hotels": game.hotels}, to=player.game_id)
 
     return {"success": True}, 204
+
+
+@game_blueprint.get("/draw-card")
+@game_authorized
+def draw_card():
+    game: Game | None = Game.query.get(g.player.game_id)
+    if not game:
+        db.session.delete(g.player)
+        db.session.commit()
+        return {"error": "Game not found"}, 400
+    
+    player: Player = g.player
+    if not player.colour == game.player:
+        return {"error": "It's not your turn"}, 400
+    
+    if not map_data.get_tile_data(player.tile)["type"] == "action":
+        return {"error": "You are not on an action tile"}, 400
+
+    action = map_data.get_random_action()
+    player.action = action
+    db.session.commit()
+
+    socketio.emit("reveal_card", {"action": action}, to=player.game_id)
+
+    return {"success": True}, 204

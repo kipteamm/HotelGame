@@ -182,7 +182,7 @@ function playerActions(tile) {
             }
         });
         lastPlayerActions = tile;
-    } else if (tile.type === "construct" && player.hotels.length > 0) {
+    } else if (tile.type === "construct" && Object.keys(player.hotels).length) {
         player.hotels.forEach(hotel => {
             actions.innerHTML += `<button onclick="constructAction('${hotel}')">Construct ${hotel}</button>`;
         });
@@ -217,5 +217,46 @@ async function buy(hotel) {
 }
 
 function awaitAction() {
+    const actionAction = document.getElementById("action-action");
+    actionAction.classList.add("active");
+    actionAction.innerHTML = `<h2>${player.colour === game.player? "You are": game.players.find(_player => _player.colour === game.player).username + " is"} drawing an action card</h2><div class="card" id="card"><div class="front">?</div><div class="back" id="action-value">back</div></div>`;
+    
+    if (player.colour !== game.player) return;
+    actionAction.innerHTML += '<br><button onclick="drawAction()" id="draw-action-btn">Draw action card</button>';
+}
 
+async function drawAction() {
+    if (player.colour !== game.player) return alert("Not your turn.");
+    const response = await fetch("/api/game/draw-card", {method: "GET", headers: {"Authorization": `Bearer ${getCookie("se_to")}`}});
+
+    if (!response.ok) return processError(response);
+}
+
+let action;
+function revealCard(data) {
+    document.getElementById("card").classList.add("active");
+    document.getElementById("action-value").innerText = data.action;
+
+    setTimeout(() => {
+        document.getElementById("action-action").classList.remove("active");
+    }, 1000);
+
+    if (player.colour !== game.player) return;
+    action = data.action;
+    
+    if (action === "One free construction phase." || action === "Construction phase for half the prise") {
+        return playerActions({"type": "construct"})
+    }
+    if (action === "Change the road layout.") {
+        return;
+    }
+    if (action === "Remove an entrance.") {
+        return;
+    }
+    if (action === "Place an entrance for free") {
+        return;
+    }
+    if (action === "Select your next free stay" || action === "Select your next half a price stay") {
+        return;
+    }
 }

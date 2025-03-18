@@ -1,3 +1,4 @@
+import random
 import ujson
 
 
@@ -10,6 +11,7 @@ class MapData:
 
         self.tiles: dict = self.data["tiles"]
         self.hotels: dict = self.data["hotels"]
+        self.actions: dict = self.data["actions"]
 
     def get_tile_data(self, tile_id: int) -> dict[str, int | str]:
         return self.tiles.get(f"tile_{tile_id}", {"x": 500, "y": 500})
@@ -33,6 +35,11 @@ class MapData:
     
     def get_hotel(self, hotel: str) -> dict[str, int | dict[str, list]] | None:
         return self.hotels.get(hotel, None)
+    
+    def get_random_action(self) -> str:
+        keys = list(self.actions.keys())
+        weights = [int(k) for k in keys]
+        return self.actions[random.choices(keys, weights=weights)[0]]
 
     @property
     def starting_positions(self) -> dict[str, dict[str, int]]:
