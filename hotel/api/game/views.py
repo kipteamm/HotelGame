@@ -96,3 +96,43 @@ def draw_card():
     socketio.emit("reveal_card", {"action": action}, to=player.game_id)
 
     return {"success": True}, 204
+
+
+@game_blueprint.patch("/construct/<string:hotel_name>")
+@game_authorized
+def construct_hotel(hotel_name: str):
+    game: Game | None = Game.query.get(g.player.game_id)
+    if not game:
+        db.session.delete(g.player)
+        db.session.commit()
+        return {"error": "Game not found"}, 400
+    
+    player: Player = g.player
+    if not player.colour == game.player:
+        return {"error": "It's not your turn"}, 400
+    
+    hotels: dict = orjson.loads(player.hotels)
+    hotel = hotels.get(hotel_name)
+    if not hotel:
+        return {"error": "You do not own this hotel."}, 400
+    
+    hotel_data = map_data.get_hotel(hotel_name)
+    assert hotel_data is not None
+    if hotel["buildings"] == hotel_data["buildings"]:
+        return {"error": "This hotel is already max level"}, 400
+    
+    if hotel_data[f"building_{hotel["buildings"]}"] > player.money:
+        return {"error": "You cannot afford this upgrade"}, 400
+    
+    player.money -= hotel_data[f"building_{hotel["buildings"]}"]
+    hotel["stars"] = hotel_data["stars"][hotel["buildings"]]
+    hotel["buildings"] += 1
+    player.hotels = orjson.dumps(hotels)
+
+    next_player = COLOURS[(COLOURS.index(game.player) + 1) % game.players]
+    game.player = next_player
+
+    db.session.commit()
+    socketio.emit("next_turn", {"next_player": next_player, "player": player.serialize()}, to=player.game_id)
+
+    return {"success": True}, 204

@@ -33,7 +33,7 @@ class MapData:
 
         return _moves
     
-    def get_hotel(self, hotel: str) -> dict[str, int | dict[str, list]] | None:
+    def get_hotel(self, hotel: str) -> dict | None:
         return self.hotels.get(hotel, None)
     
     def get_random_action(self) -> str:

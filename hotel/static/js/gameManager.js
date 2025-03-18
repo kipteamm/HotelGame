@@ -183,14 +183,16 @@ function playerActions(tile) {
         });
         lastPlayerActions = tile;
     } else if (tile.type === "construct" && Object.keys(player.hotels).length) {
-        player.hotels.forEach(hotel => {
-            actions.innerHTML += `<button onclick="constructAction('${hotel}')">Construct ${hotel}</button>`;
-        });
+        for (const [name, _] of Object.entries(player.hotels)) {
+            actions.innerHTML += `<button onclick="constructAction('${name}')">Construct ${name}</button>`;
+        }
         lastPlayerActions = tile;
     } else if (tile.type === "construct") {
         actions.innerText = "You do not own any properties.";
     } else if (tile.type === "buyConfirm") {
         actions.innerHTML = `<button onclick="playerActions()">Close</button><button onclick="buy('${tile.hotel}')">Confirm purchase for xxx$</button>`;
+    } else if (tile.type === "constructConfirm") {
+        actions.innerHTML = `<button onclick="playerActions()">Close</button><button onclick="construct('${tile.hotel}')">Confirm construction for xxx$</button>`;
     }
 
     actions.innerHTML += '<button onclick="endTurn()">End turn</button>';
@@ -210,6 +212,19 @@ function buyAction(hotel) {
 
 async function buy(hotel) {
     const response = await fetch("/api/game/buy/" + hotel, {method: "PATCH", headers: {"Authorization": `Bearer ${getCookie("se_to")}`}});
+    document.getElementById("actions").classList.remove("active");
+    document.getElementById(hotel + "-deed").classList.remove("active");
+
+    if (!response.ok) return processError(response);
+}
+
+function constructAction(hotel) {
+    playerActions({"type": "constructConfirm", "hotel": hotel})
+    document.getElementById(hotel + "-deed").classList.add("active");
+}
+
+async function construct(hotel) {
+    const response = await fetch("/api/game/construct/" + hotel, {method: "PATCH", headers: {"Authorization": `Bearer ${getCookie("se_to")}`}});
     document.getElementById("actions").classList.remove("active");
     document.getElementById(hotel + "-deed").classList.remove("active");
 
@@ -239,24 +254,24 @@ function revealCard(data) {
 
     setTimeout(() => {
         document.getElementById("action-action").classList.remove("active");
-    }, 1000);
 
-    if (player.colour !== game.player) return;
-    action = data.action;
-    
-    if (action === "One free construction phase." || action === "Construction phase for half the prise") {
-        return playerActions({"type": "construct"})
-    }
-    if (action === "Change the road layout.") {
-        return;
-    }
-    if (action === "Remove an entrance.") {
-        return;
-    }
-    if (action === "Place an entrance for free") {
-        return;
-    }
-    if (action === "Select your next free stay" || action === "Select your next half a price stay") {
-        return;
-    }
+        if (player.colour !== game.player) return;
+        action = data.action;
+        
+        if (action === "One free construction phase." || action === "Construction phase for half the prise") {
+            return playerActions({"type": "construct"})
+        }
+        if (action === "Change the road layout.") {
+            return;
+        }
+        if (action === "Remove an entrance.") {
+            return;
+        }
+        if (action === "Place an entrance for free") {
+            return;
+        }
+        if (action === "Select your next free stay" || action === "Select your next half a price stay") {
+            return;
+        }
+    }, 3000);
 }
