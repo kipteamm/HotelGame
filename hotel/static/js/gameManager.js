@@ -165,6 +165,7 @@ function playerActions(tile) {
     if (player.colour !== game.player) return;
     const actions = document.getElementById("actions")
     actions.classList.add("active");
+    actions.innerHTML = "";
 
     if (tile.type === "buy") {
         tile.hotels.forEach(hotel => {
@@ -184,4 +185,8 @@ async function endTurn() {
     document.getElementById("actions").classList.remove("active");
 
     if (!response.ok) return processError(response);
+}
+
+function awaitAction() {
+    
 }

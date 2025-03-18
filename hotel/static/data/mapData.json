@@ -5,6 +5,12 @@
         "green": {"x": 185, "y": 1440},
         "yellow": {"x": 262, "y": 1440}
     },
+    "road_configurations" : {
+        "amb_imp": [0, 1, 2, 3, 4, 5, 6, 7, 8, 34, 35, 36, 37, 38, 39, 40, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+        "amb_hor": [0, 1, 2, 3, 4, 5, 6, 7, 8, 34, 35, 36, 37, 38, 39, 40, 18, 19, 20, 21, 22, 41, 42, 43, 44, 45, 46, 47, 33],
+        "gra_imp": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33],
+        "gra_hor": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 41, 42, 43, 44, 45, 46, 47, 33]
+    },
     "tiles" : {
         "tile_0": {
             "x": 147,
@@ -53,6 +59,246 @@
             "y": 460,
             "type": "buy",
             "hotels": ["Boomerang", "Fujiyama"]
+        },
+        "tile_8": {
+            "x": 970,
+            "y": 460,
+            "type": "action",
+            "hotels": ["Boomerang", "Fujiyama"]
+        },
+        "tile_9": {
+            "x": 1136,
+            "y": 356,
+            "type": "buy",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_10": {
+            "x": 1290,
+            "y": 222,
+            "type": "construct",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_11": {
+            "x": 1472,
+            "y": 158,
+            "type": "buy",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_12": {
+            "x": 1658,
+            "y": 172,
+            "type": "construct",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_13": {
+            "x": 1830,
+            "y": 254,
+            "type": "construct",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_14": {
+            "x": 1908,
+            "y": 452,
+            "type": "buy",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_15": {
+            "x": 1984,
+            "y": 624,
+            "type": "buy",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_16": {
+            "x": 2136,
+            "y": 718,
+            "type": "construct",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_17": {
+            "x": 2290,
+            "y": 814,
+            "type": "buy",
+            "hotels": ["L'Etoile", "President"]
+        },
+        "tile_18": {
+            "x": 2290,
+            "y": 1004,
+            "type": "action",
+            "hotels": []
+        },
+        "tile_19": {
+            "x": 2280,
+            "y": 1220,
+            "type": "buy",
+            "hotels": ["Royal"]
+        },
+        "tile_20": {
+            "x": 2249,
+            "y": 1434,
+            "type": "construct",
+            "hotels": ["Royal", "Waikiki"]
+        },
+        "tile_21": {
+            "x": 2120,
+            "y": 1578,
+            "type": "buy",
+            "hotels": ["Royal", "Waikiki"]
+        },
+        "tile_22": {
+            "x": 1932,
+            "y": 1638,
+            "type": "action",
+            "hotels": ["Royal"]
+        },
+        "tile_23": {
+            "x": 1877,
+            "y": 1852,
+            "type": "buy",
+            "hotels": ["Waikiki"]
+        },
+        "tile_24": {
+            "x": 1658,
+            "y": 1916,
+            "type": "construct",
+            "hotels": ["Waikiki"]
+        },
+        "tile_25": {
+            "x": 1468,
+            "y": 1928,
+            "type": "buy",
+            "hotels": ["Taj Mahal", "Majestic"]
+        },
+        "tile_26": {
+            "x": 1274,
+            "y": 1950,
+            "type": "buy",
+            "hotels": ["Taj Mahal", "Majestic"]
+        },
+        "tile_27": {
+            "x": 1082,
+            "y": 1974,
+            "type": "construct",
+            "hotels": ["Taj Mahal", "Majestic"]
+        },
+        "tile_28": {
+            "x": 894,
+            "y": 1996,
+            "type": "buy",
+            "hotels": ["Taj Mahal", "Majestic"]
+        },
+        "tile_29": {
+            "x": 686,
+            "y": 2002,
+            "type": "construct",
+            "hotels": ["Safari", "Majestic"]
+        },
+        "tile_30": {
+            "x": 550,
+            "y": 1864,
+            "type": "construct",
+            "hotels": ["Safari", "Majestic"]
+        },
+        "tile_31": {
+            "x": 540,
+            "y": 1652,
+            "type": "buy",
+            "hotels": ["Safari", "Majestic"]
+        },
+        "tile_32": {
+            "x": 540,
+            "y": 1466,
+            "type": "construct",
+            "hotels": ["Safari", "Majestic"]
+        },
+        "tile_33": {
+            "x": 444,
+            "y": 1314,
+            "type": "action",
+            "hotels": ["Fujiyama"]
+        },
+        "tile_34": {
+            "x": 1102,
+            "y": 626,
+            "type": "construct",
+            "hotels": ["El Dorado", "L'Etoile"]
+        },
+        "tile_35": {
+            "x": 1228,
+            "y": 788,
+            "type": "buy",
+            "hotels": ["El Dorado", "L'Etoile"]
+        },
+        "tile_36": {
+            "x": 1386,
+            "y": 894,
+            "type": "construct",
+            "hotels": ["El Dorado", "L'Etoile"]
+        },
+        "tile_37": {
+            "x": 1560,
+            "y": 934,
+            "type": "buy",
+            "hotels": ["El Dorado", "L'Etoile"]
+        },
+        "tile_38": {
+            "x": 1750,
+            "y": 968,
+            "type": "buy",
+            "hotels": ["Royal", "L'Etoile"]
+        },
+        "tile_39": {
+            "x": 1926,
+            "y": 994,
+            "type": "construct",
+            "hotels": ["Royal", "L'Etoile"]
+        },
+        "tile_40": {
+            "x": 2100,
+            "y": 1006,
+            "type": "construct",
+            "hotels": ["Royal", "L'Etoile"]
+        },
+        "tile_41": {
+            "x": 1738,
+            "y": 1592,
+            "type": "construct",
+            "hotels": ["Royal", "Waikiki"]
+        },
+        "tile_42": {
+            "x": 1556,
+            "y": 1530,
+            "type": "buy",
+            "hotels": ["Royal", "Waikiki"]
+        },
+        "tile_43": {
+            "x": 1370,
+            "y": 1460,
+            "type": "buy",
+            "hotels": ["El Dorado", "Majestic"]
+        },
+        "tile_44": {
+            "x": 1198,
+            "y": 1408,
+            "type": "construct",
+            "hotels": ["El Dorado", "Majestic"]
+        },
+        "tile_45": {
+            "x": 1000,
+            "y": 1360,
+            "type": "buy",
+            "hotels": ["El Dorado", "Majestic"]
+        },
+        "tile_46": {
+            "x": 798,
+            "y": 1328,
+            "type": "construct",
+            "hotels": ["El Dorado", "Majestic"]
+        },
+        "tile_47": {
+            "x": 630,
+            "y": 1310,
+            "type": "buy",
+            "hotels": ["Fujiyama", "Majestic"]
         }
     }
 }

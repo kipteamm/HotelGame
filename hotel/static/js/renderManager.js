@@ -1,9 +1,9 @@
 const assets = {
     board: "/static/images/board.png",
-    no_ambassador_lane: "/static/images/no_ambassador_lane.png",
-    no_grandeur_avenue: "/static/images/no_grandeur_avenue.png",
-    no_horizon_way: "/static/images/no_horizon_way.png",
-    no_imperial_boulevard: "/static/images/no_imperial_boulevard.png",
+    amb: "/static/images/no_ambassador_lane.png",
+    gra: "/static/images/no_grandeur_avenue.png",
+    hor: "/static/images/no_horizon_way.png",
+    imp: "/static/images/no_imperial_boulevard.png",
     blue: "/static/images/blue.png",
     green: "/static/images/green.png",
     red: "/static/images/red.png",
@@ -20,17 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", resizeCanvas);
     // Mouse events for panning
     canvas.addEventListener("mousedown", (e) => {
+        if (e.button === 2) return;
         isDragging = true;
         startX = e.clientX - offsetX;
         startY = e.clientY - offsetY;
     });
 
     canvas.addEventListener("mousemove", (e) => {
-        if (isDragging) {
-            offsetX = e.clientX - startX;
-            offsetY = e.clientY - startY;
-            draw();
-        }
+        if (!isDragging) return;
+        offsetX = e.clientX - startX;
+        offsetY = e.clientY - startY;
+        draw();
     });
 
     canvas.addEventListener("mouseup", () => {
@@ -56,10 +56,27 @@ document.addEventListener("DOMContentLoaded", () => {
         offsetY = mouseY - worldY * scale;
         draw();
     });
+
+    canvas.addEventListener("contextmenu", (e) => {
+        e.preventDefault(); // Prevent default right-click menu
+
+        const mouseX = e.clientX - canvas.offsetLeft;
+        const mouseY = e.clientY - canvas.offsetTop;
+
+        // Convert screen coordinates to image coordinates
+        const imageX = (mouseX - offsetX) / scale;
+        const imageY = (mouseY - offsetY) / scale;
+
+        console.log(`Right-click at image coordinates: (${imageX.toFixed(2)}, ${imageY.toFixed(2)})`);
+
+        game.players.find(_player => _player.colour === "blue").pos_x = imageX;
+        game.players.find(_player => _player.colour === "blue").pos_y = imageY;
+        draw(); // Redraw to update player position
+    });
 });
 
 const images = {};
-let overlayImages = new Set(["no_ambassador_lane", "no_imperial_boulevard"]);
+let overlayImages = new Set(game.road_configuration.split("_"));
 
 let scale = 0.5;
 let offsetX = 0, offsetY = 0;
@@ -91,8 +108,8 @@ function getOverlayImages() {
 }
 
 function setOverlayImages(newImages) {
-    overlayImages = new Set(newImages);
-    draw(); // Redraw with updated overlays
+    overlayImages = new Set(newImages.split("_"));
+    draw();
 }
 
 // Function to draw the board and overlay images

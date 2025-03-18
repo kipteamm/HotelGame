@@ -33,9 +33,10 @@ socket.on("next_turn", function(data) {
 
 socket.on("update_players", (data) => data.forEach(player => updatePlayer(player)));
 
-socket.on("start_roll_dice", (data) => startRollDice());
+socket.on("start_roll_dice", (_) => startRollDice());
 
 socket.on("stop_roll_dice", async function(data) {
+    console.log(data);
     await stopRollDice(data.roll, data.moves);
     updatePlayer(data.player);
 

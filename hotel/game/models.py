@@ -14,6 +14,7 @@ class Game(db.Model):
 
     player = db.Column(db.String(6), default="blue")
     players = db.Column(db.Integer(), default=1)
+    road_configuration = db.Column(db.String(2), default="amb_imp")
 
     creation_timestamp = db.Column(db.Float(), nullable=False, unique=False)
 
@@ -31,6 +32,7 @@ class Game(db.Model):
             "stage": self.stage,
             "player": self.player,
             "players": self.players,
+            "road_configuration": self.road_configuration,
             "creation_timestamp": self.creation_timestamp,
         }
 

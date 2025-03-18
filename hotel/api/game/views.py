@@ -24,8 +24,6 @@ def end_turn():
         return {"error": "It's not your turn"}, 400
     
     next_player = COLOURS[(COLOURS.index(game.player) + 1) % game.players]
-    print(next_player)
-
     game.player = next_player
     db.session.commit()
 
