@@ -27,8 +27,12 @@ socket.on("start_game", function(data) {
 });
 
 socket.on("next_turn", function(data) {
-    game.player = data.player;
+    game.player = data.next_player;
     awaitDice();
+
+    updatePlayer(data.player);
+    if (!data.hotels) return;
+    game.hotels = data.hotels;
 });
 
 socket.on("update_players", (data) => data.forEach(player => updatePlayer(player)));

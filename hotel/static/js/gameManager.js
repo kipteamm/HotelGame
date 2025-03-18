@@ -47,6 +47,8 @@ async function startGame() {
 }
 
 function updatePlayer(playerData) {
+    if (!playerData) return;
+
     const _player = game.players.find(_player => _player.session_token === playerData.session_token);
     if (!_player) return;
     Object.assign(_player, playerData);
@@ -161,23 +163,37 @@ function moveToPoint(player, target) {
     });
 }
 
+let lastPlayerActions;
 function playerActions(tile) {
     if (player.colour !== game.player) return;
-    const actions = document.getElementById("actions")
+    if (!tile) {
+        tile = lastPlayerActions;
+    }
+
+    document.querySelector(".deed.active")?.classList.remove("active");
+    const actions = document.getElementById("actions");
     actions.classList.add("active");
     actions.innerHTML = "";
 
     if (tile.type === "buy") {
         tile.hotels.forEach(hotel => {
-            actions.innerHTML += `<button onclick="details('${hotel}')">Buy ${hotel}</button>`;
+            if (game.hotels.includes(hotel)) {
+                actions.innerHTML += `<button onclick="buyAction('${hotel}')">Buy ${hotel}</button>`;
+            }
         });
-    } else if (tile. type === "construct" && player.hotels.length > 0) {
+        lastPlayerActions = tile;
+    } else if (tile.type === "construct" && player.hotels.length > 0) {
         player.hotels.forEach(hotel => {
-            actions.innerHTML += `<button onclick="construct('${hotel}')">Construct ${hotel}</button>`;
+            actions.innerHTML += `<button onclick="constructAction('${hotel}')">Construct ${hotel}</button>`;
         });
+        lastPlayerActions = tile;
+    } else if (tile.type === "construct") {
+        actions.innerText = "You do not own any properties.";
+    } else if (tile.type === "buyConfirm") {
+        actions.innerHTML = `<button onclick="playerActions()">Close</button><button onclick="buy('${tile.hotel}')">Confirm purchase for xxx$</button>`;
     }
 
-    actions.innerHTML += '<button onclick="endTurn()">End turn</button>'
+    actions.innerHTML += '<button onclick="endTurn()">End turn</button>';
 }
 
 async function endTurn() {
@@ -187,6 +203,19 @@ async function endTurn() {
     if (!response.ok) return processError(response);
 }
 
+function buyAction(hotel) {
+    playerActions({"type": "buyConfirm", "hotel": hotel})
+    document.getElementById(hotel + "-deed").classList.add("active");
+}
+
+async function buy(hotel) {
+    const response = await fetch("/api/game/buy/" + hotel, {method: "PATCH", headers: {"Authorization": `Bearer ${getCookie("se_to")}`}});
+    document.getElementById("actions").classList.remove("active");
+    document.getElementById(hotel + "-deed").classList.remove("active");
+
+    if (!response.ok) return processError(response);
+}
+
 function awaitAction() {
-    
+
 }

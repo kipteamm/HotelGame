@@ -9,6 +9,7 @@ class MapData:
             self.data = ujson.load(file)
 
         self.tiles: dict = self.data["tiles"]
+        self.hotels: dict = self.data["hotels"]
 
     def get_tile_data(self, tile_id: int) -> dict[str, int | str]:
         return self.tiles.get(f"tile_{tile_id}", {"x": 500, "y": 500})
@@ -29,7 +30,9 @@ class MapData:
             _moves.append({"x": self.tiles[f"tile_{tiles[(current_tile_index + i) % len(tiles)]}"]["x"], "y": self.tiles[f"tile_{tiles[(current_tile_index + i) % len(tiles)]}"]["y"]})
 
         return _moves
-
+    
+    def get_hotel(self, hotel: str) -> dict[str, int | dict[str, list]] | None:
+        return self.hotels.get(hotel, None)
 
     @property
     def starting_positions(self) -> dict[str, dict[str, int]]:

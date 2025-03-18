@@ -16,109 +16,109 @@
             "x": 147,
             "y": 1250,
             "type": "construct",
-            "hotels": ["Fujiyama"]
+            "hotels": ["fujiyama"]
         },
         "tile_1": {
             "x": 104,
             "y": 1000,
             "type": "buy",
-            "hotels": ["Fujiyama"]
+            "hotels": ["fujiyama"]
         },
         "tile_2": {
             "x": 104,
             "y": 800,
             "type": "construct",
-            "hotels": ["Fujiyama"]
+            "hotels": ["fujiyama"]
         },
         "tile_3": {
             "x": 130,
             "y": 610,
             "type": "buy",
-            "hotels": ["Boomerang", "Fujiyama"]
+            "hotels": ["boomerang", "fujiyama"]
         },
         "tile_4": {
             "x": 250,
             "y": 460,
             "type": "construct",
-            "hotels": ["Boomerang", "Fujiyama"]
+            "hotels": ["boomerang", "fujiyama"]
         },
         "tile_5": {
             "x": 430,
             "y": 365,
             "type": "buy",
-            "hotels": ["Boomerang", "Fujiyama"]
+            "hotels": ["boomerang", "fujiyama"]
         },
         "tile_6": {
             "x": 600,
             "y": 365,
             "type": "construct",
-            "hotels": ["Boomerang", "Fujiyama"]
+            "hotels": ["boomerang", "fujiyama"]
         },
         "tile_7": {
             "x": 790,
             "y": 460,
             "type": "buy",
-            "hotels": ["Boomerang", "Fujiyama"]
+            "hotels": ["boomerang", "fujiyama"]
         },
         "tile_8": {
             "x": 970,
             "y": 460,
             "type": "action",
-            "hotels": ["Boomerang", "Fujiyama"]
+            "hotels": ["boomerang", "fujiyama"]
         },
         "tile_9": {
             "x": 1136,
             "y": 356,
             "type": "buy",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_10": {
             "x": 1290,
             "y": 222,
             "type": "construct",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_11": {
             "x": 1472,
             "y": 158,
             "type": "buy",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_12": {
             "x": 1658,
             "y": 172,
             "type": "construct",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_13": {
             "x": 1830,
             "y": 254,
             "type": "construct",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_14": {
             "x": 1908,
             "y": 452,
             "type": "buy",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_15": {
             "x": 1984,
             "y": 624,
             "type": "buy",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_16": {
             "x": 2136,
             "y": 718,
             "type": "construct",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_17": {
             "x": 2290,
             "y": 814,
             "type": "buy",
-            "hotels": ["L'Etoile", "President"]
+            "hotels": ["letoile", "president"]
         },
         "tile_18": {
             "x": 2290,
@@ -130,175 +130,206 @@
             "x": 2280,
             "y": 1220,
             "type": "buy",
-            "hotels": ["Royal"]
+            "hotels": ["royal"]
         },
         "tile_20": {
             "x": 2249,
             "y": 1434,
             "type": "construct",
-            "hotels": ["Royal", "Waikiki"]
+            "hotels": ["royal", "waikiki"]
         },
         "tile_21": {
             "x": 2120,
             "y": 1578,
             "type": "buy",
-            "hotels": ["Royal", "Waikiki"]
+            "hotels": ["royal", "waikiki"]
         },
         "tile_22": {
             "x": 1932,
             "y": 1638,
             "type": "action",
-            "hotels": ["Royal"]
+            "hotels": ["royal"]
         },
         "tile_23": {
             "x": 1877,
             "y": 1852,
             "type": "buy",
-            "hotels": ["Waikiki"]
+            "hotels": ["waikiki"]
         },
         "tile_24": {
             "x": 1658,
             "y": 1916,
             "type": "construct",
-            "hotels": ["Waikiki"]
+            "hotels": ["waikiki"]
         },
         "tile_25": {
             "x": 1468,
             "y": 1928,
             "type": "buy",
-            "hotels": ["Taj Mahal", "Majestic"]
+            "hotels": ["taj_mahal", "majestic"]
         },
         "tile_26": {
             "x": 1274,
             "y": 1950,
             "type": "buy",
-            "hotels": ["Taj Mahal", "Majestic"]
+            "hotels": ["taj_mahal", "majestic"]
         },
         "tile_27": {
             "x": 1082,
             "y": 1974,
             "type": "construct",
-            "hotels": ["Taj Mahal", "Majestic"]
+            "hotels": ["taj_mahal", "majestic"]
         },
         "tile_28": {
             "x": 894,
             "y": 1996,
             "type": "buy",
-            "hotels": ["Taj Mahal", "Majestic"]
+            "hotels": ["taj_mahal", "majestic"]
         },
         "tile_29": {
             "x": 686,
             "y": 2002,
             "type": "construct",
-            "hotels": ["Safari", "Majestic"]
+            "hotels": ["safari", "majestic"]
         },
         "tile_30": {
             "x": 550,
             "y": 1864,
             "type": "construct",
-            "hotels": ["Safari", "Majestic"]
+            "hotels": ["safari", "majestic"]
         },
         "tile_31": {
             "x": 540,
             "y": 1652,
             "type": "buy",
-            "hotels": ["Safari", "Majestic"]
+            "hotels": ["safari", "majestic"]
         },
         "tile_32": {
             "x": 540,
             "y": 1466,
             "type": "construct",
-            "hotels": ["Safari", "Majestic"]
+            "hotels": ["safari", "majestic"]
         },
         "tile_33": {
             "x": 444,
             "y": 1314,
             "type": "action",
-            "hotels": ["Fujiyama"]
+            "hotels": ["fujiyama"]
         },
         "tile_34": {
             "x": 1102,
             "y": 626,
             "type": "construct",
-            "hotels": ["El Dorado", "L'Etoile"]
+            "hotels": ["el_dorado", "letoile"]
         },
         "tile_35": {
             "x": 1228,
             "y": 788,
             "type": "buy",
-            "hotels": ["El Dorado", "L'Etoile"]
+            "hotels": ["el_dorado", "letoile"]
         },
         "tile_36": {
             "x": 1386,
             "y": 894,
             "type": "construct",
-            "hotels": ["El Dorado", "L'Etoile"]
+            "hotels": ["el_dorado", "letoile"]
         },
         "tile_37": {
             "x": 1560,
             "y": 934,
             "type": "buy",
-            "hotels": ["El Dorado", "L'Etoile"]
+            "hotels": ["el_dorado", "letoile"]
         },
         "tile_38": {
             "x": 1750,
             "y": 968,
             "type": "buy",
-            "hotels": ["Royal", "L'Etoile"]
+            "hotels": ["royal", "letoile"]
         },
         "tile_39": {
             "x": 1926,
             "y": 994,
             "type": "construct",
-            "hotels": ["Royal", "L'Etoile"]
+            "hotels": ["royal", "letoile"]
         },
         "tile_40": {
             "x": 2100,
             "y": 1006,
             "type": "construct",
-            "hotels": ["Royal", "L'Etoile"]
+            "hotels": ["royal", "letoile"]
         },
         "tile_41": {
             "x": 1738,
             "y": 1592,
             "type": "construct",
-            "hotels": ["Royal", "Waikiki"]
+            "hotels": ["royal", "waikiki"]
         },
         "tile_42": {
             "x": 1556,
             "y": 1530,
             "type": "buy",
-            "hotels": ["Royal", "Waikiki"]
+            "hotels": ["royal", "waikiki"]
         },
         "tile_43": {
             "x": 1370,
             "y": 1460,
             "type": "buy",
-            "hotels": ["El Dorado", "Majestic"]
+            "hotels": ["el_dorado", "majestic"]
         },
         "tile_44": {
             "x": 1198,
             "y": 1408,
             "type": "construct",
-            "hotels": ["El Dorado", "Majestic"]
+            "hotels": ["el_dorado", "majestic"]
         },
         "tile_45": {
             "x": 1000,
             "y": 1360,
             "type": "buy",
-            "hotels": ["El Dorado", "Majestic"]
+            "hotels": ["el_dorado", "majestic"]
         },
         "tile_46": {
             "x": 798,
             "y": 1328,
             "type": "construct",
-            "hotels": ["El Dorado", "Majestic"]
+            "hotels": ["el_dorado", "majestic"]
         },
         "tile_47": {
             "x": 630,
             "y": 1310,
             "type": "buy",
-            "hotels": ["Fujiyama", "Majestic"]
+            "hotels": ["fujiyama", "majestic"]
+        }
+    },
+    "hotels": {
+        "boomerang": {
+            "cost_of_land": 500,
+            "compulsory_purchase_price": 250,
+            "entrance": 100,
+            "buildings": 2,
+            "building_0": 1800,
+            "building_1": 250,
+            "stars": [1, 2],
+            "prices": {
+                "1": [400, 800, 1200, 1600, 2000, 2400],
+                "2": [600, 1200, 1800, 2400, 3000, 3600]
+            }
+        },
+        "fujiyama": {
+            "cost_of_land": 1000,
+            "compulsory_purchase_price": 500,
+            "entrance": 100,
+            "buildings": 4,
+            "building_0": 2200,
+            "building_1": 1400,
+            "building_2": 1400,
+            "building_3": 500,
+            "stars": [1, 1, 2, 3],
+            "prices": {
+                "1": [100, 200, 300, 400, 500, 600],
+                "2": [200, 400, 600, 800, 1000, 1200],
+                "3": [400, 800, 1200, 1600, 2000, 2400]
+            }
         }
     }
 }

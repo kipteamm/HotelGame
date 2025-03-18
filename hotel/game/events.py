@@ -39,7 +39,7 @@ def register_events(socketio: SocketIO):
 
         moves = map_data.get_moves(road_configuration[0], player.tile, roll)
 
-        if player.tile < 8 and player.tile + roll > 8:
+        if player.tile < 8 and final_tile_id > 8:
             player.money += 2000
 
         player.tile = final_tile_id

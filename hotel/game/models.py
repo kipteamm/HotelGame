@@ -1,6 +1,7 @@
 from hotel.extensions import db
 
 import secrets
+import orjson
 import random
 import string
 import time
@@ -14,7 +15,9 @@ class Game(db.Model):
 
     player = db.Column(db.String(6), default="blue")
     players = db.Column(db.Integer(), default=1)
+
     road_configuration = db.Column(db.String(2), default="amb_imp")
+    hotels = db.Column(db.String(86), default="boomerang,el_dorado,fujiyama,letoile,majestic,president,royal,safari,taj_mahal,waikiki")
 
     creation_timestamp = db.Column(db.Float(), nullable=False, unique=False)
 
@@ -34,6 +37,7 @@ class Game(db.Model):
             "players": self.players,
             "road_configuration": self.road_configuration,
             "creation_timestamp": self.creation_timestamp,
+            "hotels": self.hotels
         }
 
         if not players:
@@ -52,6 +56,7 @@ class Player(db.Model):
     username = db.Column(db.String(128))
     is_host = db.Column(db.Boolean(), default=False)
 
+    hotels = db.Column(db.String(500), default="{}")
     colour = db.Column(db.String(6), nullable=True)
     money = db.Column(db.Integer(), default=0)
     pos_x = db.Column(db.Integer(), default=0)
@@ -91,5 +96,5 @@ class Player(db.Model):
             "pos_x": self.pos_x,
             "pos_y": self.pos_y,
             "tile": self.tile,
-            "hotels": []
+            "hotels": orjson.loads(self.hotels)
         }
