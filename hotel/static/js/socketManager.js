@@ -31,8 +31,7 @@ socket.on("next_turn", function(data) {
     awaitDice();
 
     updatePlayer(data.player);
-    if (!data.hotels) return;
-    game.hotels = data.hotels;
+    updateGame(data.game);
 });
 
 socket.on("update_players", (data) => data.forEach(player => updatePlayer(player)));
@@ -49,3 +48,8 @@ socket.on("stop_roll_dice", async function(data) {
 });
 
 socket.on("reveal_card", (data) => revealCard(data));
+
+socket.on("update_game", function(data) {
+    Object.assign(game, data);
+    setOverlayImages(game.road_configuration);
+});

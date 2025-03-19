@@ -75,7 +75,7 @@ def buy_hotel(hotel_name: str):
     game.player = next_player
 
     db.session.commit()
-    socketio.emit("next_turn", {"next_player": next_player, "player": player.serialize(), "hotels": game.hotels}, to=player.game_id)
+    socketio.emit("next_turn", {"next_player": next_player, "player": player.serialize(), "game": {"hotels": game.hotels}}, to=player.game_id)
 
     return {"success": True}, 204
 
@@ -149,5 +149,51 @@ def construct_hotel(hotel_name: str):
 
     db.session.commit()
     socketio.emit("next_turn", {"next_player": next_player, "player": player.serialize()}, to=player.game_id)
+
+    return {"success": True}, 204
+
+
+CONFIGURATIONS = ["amb_imp", "amb_hor", "gra_imp", "gra_hor"]
+
+
+@game_blueprint.patch("/layout/<string:configuration>")
+@game_authorized
+def layout(configuration: str):
+    game: Game | None = Game.query.get(g.player.game_id)
+    if not game:
+        db.session.delete(g.player)
+        db.session.commit()
+        return {"error": "Game not found"}, 400
+    
+    player: Player = g.player
+    if not player.colour == game.player:
+        return {"error": "It's not your turn"}, 400
+    
+    if not map_data.get_tile_data(player.tile)["type"] == "action":
+        return {"error": "You are not on an action tile"}, 400
+    
+    if player.action != "Change the road layout.":
+        return {"error": "You cannot perform this action"}, 400
+
+    if configuration not in CONFIGURATIONS:
+        return {"error": "Invalid configuration"}, 400
+    
+    current_configuration = map_data.get_road_tiles(game.road_configuration)
+    new_configuration = map_data.get_road_tiles(configuration)
+    invalid_tiles = [tile for tile in new_configuration if tile not in current_configuration]
+
+    if db.session.query(Player.session_token).filter( # type: ignore
+        Player.game_id==player.game_id,
+        Player.tile.in_(invalid_tiles)
+    ).first():
+        return {"error": "Invalid configuration"}, 400
+
+    next_player = COLOURS[(COLOURS.index(game.player) + 1) % game.players]
+    game.player = next_player
+    game.road_configuration = configuration
+    player.action = None
+
+    db.session.commit()
+    socketio.emit("next_turn", {"next_player": next_player, "game": {"road_configuration": game.road_configuration}}, to=player.game_id)
 
     return {"success": True}, 204

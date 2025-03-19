@@ -12,6 +12,7 @@ class MapData:
         self.tiles: dict = self.data["tiles"]
         self.hotels: dict = self.data["hotels"]
         self.actions: dict = self.data["actions"]
+        self.configurations: dict = self.data["road_configurations"]
 
     def get_tile_data(self, tile_id: int) -> dict:
         return self.tiles.get(f"tile_{tile_id}", {"x": 500, "y": 500})
@@ -40,6 +41,9 @@ class MapData:
         keys = list(self.actions.keys())
         weights = [int(k) for k in keys]
         return self.actions[random.choices(keys, weights=weights)[0]]
+    
+    def get_road_tiles(self, road_configuration: str) -> list:
+        return self.configurations[road_configuration]
 
     @property
     def starting_positions(self) -> dict[str, dict[str, int]]:

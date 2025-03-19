@@ -17,6 +17,7 @@ body {
 
 ul {
     position: fixed;
+    top: 0;
 }
 
 .player-action {
@@ -119,4 +120,28 @@ ul {
 }
 .deed.active {
     display: block;
+}
+
+.road-layout {
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 25px;
+}
+.road-layout .option {
+    position: relative;
+    max-width: 275px;
+    aspect-ratio: 1/1;
+    width: 100%;
+    cursor: pointer;
+    transition: .3s;
+}
+.road-layout .option img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+.road-layout .option:hover {
+    transform: scale(1.1);
 }

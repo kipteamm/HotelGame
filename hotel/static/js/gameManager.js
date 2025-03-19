@@ -12,12 +12,22 @@ function getCookie(name) {
     return null;
 }
 
+let mapData;
 if (document.readyState !== 'loading') {
-    updateStage(game.stage);
+    prepareGame();
 } else {
     document.addEventListener('DOMContentLoaded', function () {
-        updateStage(game.stage);
+        prepareGame();
     });
+}
+
+async function prepareGame() {
+    updateStage(game.stage);
+
+    const response = await fetch("/static/data/mapData.json");
+    if (!response.ok) return;
+
+    mapData = await response.json();
 }
 
 function updateStage(stage) {
@@ -65,6 +75,11 @@ function updatePlayer(playerData) {
     }
 
     playerElm.innerHTML = `${JSON.stringify(playerData)}`;
+}
+
+function updateGame(gameData) {
+    if (!gameData) return;
+    Object.assign(game, gameData);
 }
 
 function awaitDice() {
@@ -262,7 +277,7 @@ function revealCard(data) {
             return playerActions({"type": "construct"})
         }
         if (action === "Change the road layout.") {
-            return;
+            return awaitChangeRoadLayout();
         }
         if (action === "Remove an entrance.") {
             return;
@@ -274,4 +289,21 @@ function revealCard(data) {
             return;
         }
     }, 3000);
+}
+
+function awaitChangeRoadLayout() {
+    for (const [option, tiles] of Object.entries(mapData.road_configurations)) {
+        if (!game.players.find(_player => tiles.filter((el) => !mapData.road_configurations[game.road_configuration].includes(el)).includes(_player.tile))) continue;
+
+        document.getElementById("option-" + option).remove();
+    }
+
+    document.getElementById("road-layout-action").classList.add("active");
+}
+
+async function changeLayout(layout) {
+    const response = await fetch("/api/game/layout/" + layout, {method: "PATCH", headers: {"Authorization": `Bearer ${getCookie("se_to")}`}});
+    document.getElementById("road-layout-action").classList.remove("active");
+
+    if (!response.ok) return processError(response);
 }

@@ -39,6 +39,28 @@
     <div class="stage" id="stage-1">
         <div class="player-action" id="dice-action"></div>
         <div class="player-action" id="action-action"></div>
+        <div class="player-action road-layout" id="road-layout-action">
+            <div class="option" onclick="changeLayout('amb_imp')" id="option-amb_imp">
+                <img src="/static/images/board.png">
+                <img src="/static/images/no_ambassador_lane.png">
+                <img src="/static/images/no_imperial_boulevard.png">
+            </div>
+            <div class="option" onclick="changeLayout('amb_hor')" id="option-amb_hor">
+                <img src="/static/images/board.png">
+                <img src="/static/images/no_ambassador_lane.png">
+                <img src="/static/images/no_horizon_way.png">
+            </div>
+            <div class="option" onclick="changeLayout('gra_imp')" id="option-gra_imp">
+                <img src="/static/images/board.png">
+                <img src="/static/images/no_grandeur_avenue.png">
+                <img src="/static/images/no_imperial_boulevard.png">
+            </div>
+            <div class="option" onclick="changeLayout('gra_hor')" id="option-gra_hor">
+                <img src="/static/images/board.png">
+                <img src="/static/images/no_grandeur_avenue.png">
+                <img src="/static/images/no_horizon_way.png">
+            </div>
+        </div>
 
         <img class="deed" id="boomerang-deed" src="/static/images/boomerang_deed.png" loading="lazy"/>
         <img class="deed" id="el_dorado-deed" src="/static/images/el_dorado_deed.png" loading="lazy"/>
