@@ -13,7 +13,7 @@ class MapData:
         self.hotels: dict = self.data["hotels"]
         self.actions: dict = self.data["actions"]
 
-    def get_tile_data(self, tile_id: int) -> dict[str, int | str]:
+    def get_tile_data(self, tile_id: int) -> dict:
         return self.tiles.get(f"tile_{tile_id}", {"x": 500, "y": 500})
     
     def get_tile(self, road_configuration: str, start_tile_id: int, moves: int) -> tuple[dict[str, int | str], int]:

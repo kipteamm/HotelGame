@@ -258,7 +258,7 @@ function revealCard(data) {
         if (player.colour !== game.player) return;
         action = data.action;
         
-        if (action === "One free construction phase." || action === "Construction phase for half the prise") {
+        if (action === "One free construction phase." || action === "Construction phase for half the prise.") {
             return playerActions({"type": "construct"})
         }
         if (action === "Change the road layout.") {

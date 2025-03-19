@@ -47,6 +47,13 @@ def buy_hotel(hotel_name: str):
     if not player.colour == game.player:
         return {"error": "It's not your turn"}, 400
     
+    tile_data = map_data.get_tile_data(player.tile)
+    if not tile_data["type"] == "buy":
+        return {"error": "You are not on an action tile"}, 400
+    
+    if not hotel_name in tile_data["hotels"]:
+        return {"error": "You are not on an action tile"}, 400
+    
     hotel = map_data.get_hotel(hotel_name)
     if not hotel:
         return {"error": "Hotel not found"}, 400
@@ -111,6 +118,14 @@ def construct_hotel(hotel_name: str):
     if not player.colour == game.player:
         return {"error": "It's not your turn"}, 400
     
+    multiplier = 1
+    if not map_data.get_tile_data(player.tile)["type"] == "construction":
+        if not player.action == "One free construction phase." or not player.action == "Construction phase for half the prise.":
+            return {"error": "You are not on an action tile"}, 400
+        
+        multiplier = 0 if player.action == "One free construction phase." else .5
+        player.action = None
+    
     hotels: dict = orjson.loads(player.hotels)
     hotel = hotels.get(hotel_name)
     if not hotel:
@@ -121,10 +136,10 @@ def construct_hotel(hotel_name: str):
     if hotel["buildings"] == hotel_data["buildings"]:
         return {"error": "This hotel is already max level"}, 400
     
-    if hotel_data[f"building_{hotel["buildings"]}"] > player.money:
+    if (hotel_data[f"building_{hotel["buildings"]}"] * multiplier) > player.money:
         return {"error": "You cannot afford this upgrade"}, 400
     
-    player.money -= hotel_data[f"building_{hotel["buildings"]}"]
+    player.money -= (hotel_data[f"building_{hotel["buildings"]}"] * multiplier)
     hotel["stars"] = hotel_data["stars"][hotel["buildings"]]
     hotel["buildings"] += 1
     player.hotels = orjson.dumps(hotels)
