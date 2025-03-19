@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const images = {};
-let overlayImages = new Set(game.road_configuration.split("_"));
+let roadConfiguration = new Set(game.road_configuration.split("_"));
 
 let scale = 0.5;
 let offsetX = 0, offsetY = 0;
@@ -103,12 +103,12 @@ function loadAssets() {
 }
 
 // Setter & Getter for overlay images
-function getOverlayImages() {
-    return [...overlayImages];
+function getRoadConfiguration() {
+    return [...roadConfiguration];
 }
 
-function setOverlayImages(newImages) {
-    overlayImages = new Set(newImages.split("_"));
+function setRoadConfiguration(newImages) {
+    roadConfiguration = new Set(newImages.split("_"));
     draw();
 }
 
@@ -123,7 +123,7 @@ function draw() {
     ctx.drawImage(images.board, 0, 0, 2476, 2476);
 
     // Draw all overlay images
-    overlayImages.forEach(imageKey => {
+    roadConfiguration.forEach(imageKey => {
         if (images[imageKey]) {
             ctx.drawImage(images[imageKey], 0, 0, 2476, 2476);
         }
@@ -140,5 +140,5 @@ function draw() {
 loadAssets();
 
 // Expose functions for external use
-window.getOverlayImages = getOverlayImages;
-window.setOverlayImages = setOverlayImages;
+window.getRoadConfiguration = getRoadConfiguration;
+window.setRoadConfiguration = setRoadConfiguration;

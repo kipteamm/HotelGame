@@ -48,8 +48,3 @@ socket.on("stop_roll_dice", async function(data) {
 });
 
 socket.on("reveal_card", (data) => revealCard(data));
-
-socket.on("update_game", function(data) {
-    Object.assign(game, data);
-    setOverlayImages(game.road_configuration);
-});

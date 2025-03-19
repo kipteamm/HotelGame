@@ -119,7 +119,7 @@ def construct_hotel(hotel_name: str):
         return {"error": "It's not your turn"}, 400
     
     multiplier = 1
-    if not map_data.get_tile_data(player.tile)["type"] == "construction":
+    if not map_data.get_tile_data(player.tile)["type"] == "construct":
         if not player.action == "One free construction phase." or not player.action == "Construction phase for half the prise.":
             return {"error": "You are not on an action tile"}, 400
         
@@ -180,7 +180,7 @@ def layout(configuration: str):
     
     current_configuration = map_data.get_road_tiles(game.road_configuration)
     new_configuration = map_data.get_road_tiles(configuration)
-    invalid_tiles = [tile for tile in new_configuration if tile not in current_configuration]
+    invalid_tiles = [tile for tile in current_configuration if tile not in new_configuration]
 
     if db.session.query(Player.session_token).filter( # type: ignore
         Player.game_id==player.game_id,

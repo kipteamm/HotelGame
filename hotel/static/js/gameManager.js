@@ -80,6 +80,8 @@ function updatePlayer(playerData) {
 function updateGame(gameData) {
     if (!gameData) return;
     Object.assign(game, gameData);
+
+    setRoadConfiguration(game.road_configuration);
 }
 
 function awaitDice() {
@@ -293,7 +295,7 @@ function revealCard(data) {
 
 function awaitChangeRoadLayout() {
     for (const [option, tiles] of Object.entries(mapData.road_configurations)) {
-        if (!game.players.find(_player => tiles.filter((el) => !mapData.road_configurations[game.road_configuration].includes(el)).includes(_player.tile))) continue;
+        if (!game.players.find(_player => mapData.road_configurations[game.road_configuration].filter((el) => !tiles.includes(el)).includes(_player.tile))) continue;
 
         document.getElementById("option-" + option).remove();
     }
